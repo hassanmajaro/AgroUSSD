@@ -5,6 +5,7 @@ from services.user_service import UserService
 from models.crop import Crop 
 from models.livestock import Livestock 
 from models.harvest import Harvest 
+from services.harvest_service import HarvestService
 
 
 
@@ -44,39 +45,76 @@ def login_user():
                 option = input("\nDo you want to add harvest? (Yes/No): ").capitalize()
                 if option == "Yes":
                     add_harvest(u["user_id"])
-            return u
+
+            elif u["role"] == "Buyer":
+                print("Buyer Menu")           
+                print("1. View all harvests")
+                print("2. Filter harvests")
+                choice = input("Choose option (1/2): ")
+
+                if choice == "1":
+                    print("\nAvailable Harvests")
+                    harvests = HarvestService.list_all_harvests()
+                    if harvests:
+                        for h in harvests:
+                            print(h)
+                    else:
+                        print("No harvests available at the moment.")
+
+                elif choice == "2":
+                    print("\n Filter Harvests")
+                    p_type = input("Enter producty type to filter (Crop/Livestock): ")
+                    crop = None
+                    livestock = None 
+
+                    if p_type.capitalize() == "Crop":
+                        crop = input("Enter crop name to filter: ").capitalize()
+                    elif p_type.capitalize() == "Livestock":
+                        livestock = input("Enter livestock type to filter: ").capitalize()
+
+                    results = HarvestService.filter_harvests(
+                        product_type = p_type if p_type else None,
+                        crop = crop if crop else None,
+                        livestock = livestock if livestock else None
+                    )
+
+                    if results:
+                        print("Filtered Harvests")
+                        for r in results:
+                            print(r)
+                    else:
+                        print("No harvests match your filter")
+
+            return print("Invalid credentials. Please Try again")
         
     print("Invalid Login Credentials. Try Again")
     return None
     
 def add_harvest(farmer_id):
-    print("\n===Add Harvest===")
-    product_type = input("Enter product type (Crop/Livestock): ").capitalize()
+    print("Add harvest")
 
-    name = input("Enter product name: ")
+    product_type = input("Enter product type (Crop/Livestock): ").capitalize()
+    name = input("Enter product name: ").capitalize()
     quantity = int(input("Enter quantity: "))
     price = float(input("Enter price: "))
 
+    extra_info = {}
     if product_type == "Crop":
-        variety = input("Enter crop variety: ").capitalize()
-        season = input("Enter season: ").capitalize()
-        product = Crop(name, quantity, price, variety, season)
-
+        extra_info["variety"] = input("Enter crop variety: ").capitalize()
+        extra_info["variety"] = input("Enter season: ").capitalize()
     elif product_type == "Livestock":
-        breed = input("Enter breed: ")
-        product = Livestock(name, quantity, price, breed)
+        extra_info["variety"] = input("Enter livestock breed: ").capitalize()
     else:
-        print("Invalid product type. Must either be Crop or Livestock")
+        print("Invalid product type. Must be crop or Livestock")
         return None 
-    
+
     harvest_date = input("Enter harvest date (YYYY-MM-DD): ")
-    harvest = Harvest(farmer_id, product, harvest_date)
 
-    save_harvest(harvest.to_dict())
-
+    #use service
+    harvest = HarvestService.add_harvest(farmer_id, product_type, name, quantity, price, extra_info, harvest_date)
     print("\nHarvest added successfully")
     print(harvest)
-    return harvest 
+    return harvest
 
 
 def main():
