@@ -1,7 +1,7 @@
-from src.utils.data_handler import save_harvest, load_harvests 
-from src.models.harvest import Harvest 
-from src.models.crop import Crop 
-from src.models.livestock import Livestock 
+from utils.data_handler import save_harvest, load_harvests 
+from models.harvest import Harvest 
+from models.crop import Crop 
+from models.livestock import Livestock 
 
 
 class HarvestService:
@@ -12,7 +12,7 @@ class HarvestService:
         if product_type.capitalize() == "Crop":
             product = Crop(name, quantity, price, extra_info["variety"], extra_info["season"])
         elif product_type.capitalize() == "Livestock":
-            product = Livestock(name, quantity, price, extra_info["breed"])
+            product = Livestock(name, quantity, price, extra_info["variety"])
         else:
             raise ValueError("Invalid product type: must be Crop or Livestock")
         
@@ -32,7 +32,7 @@ class HarvestService:
         return load_harvests()
 
     @staticmethod 
-    def filter_harvests(product_type = None, cropo = None, livestock = None):
+    def filter_harvests(product_type = None, crop = None, livestock = None):
         harvests = load_harvests()
         filtered = harvests
 

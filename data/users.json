@@ -1,0 +1,18 @@
+[
+     {
+          "user_id": "AgF7256",
+          "name": "Hassan",
+          "phone": "09090909090",
+          "location": "Abeokuta",
+          "pin": "254869",
+          "role": "Farmer"
+     },
+     {
+          "user_id": "AgB9900",
+          "name": "Ope",
+          "phone": "0987654321",
+          "location": "Immigration",
+          "pin": "254869",
+          "role": "Buyer"
+     }
+]

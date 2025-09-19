@@ -1,0 +1,13 @@
+[
+     {
+          "harvest_id": "H2408",
+          "farmer_id": "AgF7256",
+          "product": {
+               "name": "Cow",
+               "quantity": 20,
+               "price": 20000.0,
+               "type": "Livestock"
+          },
+          "harvest_date": "2025-09-23"
+     }
+]

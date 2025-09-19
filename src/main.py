@@ -32,6 +32,32 @@ def register_user():
         print("Error:", ve)
         return None 
     
+def add_harvest(farmer_id):
+    print("Add harvest")
+
+    product_type = input("Enter product type (Crop/Livestock): ").capitalize()
+    name = input("Enter product name: ").capitalize()
+    quantity = int(input("Enter quantity: "))
+    price = float(input("Enter price: "))
+
+    extra_info = {}
+    if product_type == "Crop":
+        extra_info["variety"] = input("Enter crop variety: ").capitalize()
+        extra_info["variety"] = input("Enter season: ").capitalize()
+    elif product_type == "Livestock":
+        extra_info["variety"] = input("Enter livestock breed: ").capitalize()
+    else:
+        print("Invalid product type. Must be crop or Livestock")
+        return None 
+
+    harvest_date = input("Enter harvest date (YYYY-MM-DD): ")
+
+    #use service
+    harvest = HarvestService.add_harvest(farmer_id, product_type, name, quantity, price, extra_info, harvest_date)
+    print("\nHarvest added successfully")
+    print(harvest)
+    return harvest
+    
 def login_user():
     print("\nLogin")
     phone = input("Enter phone: ")
@@ -84,38 +110,13 @@ def login_user():
                             print(r)
                     else:
                         print("No harvests match your filter")
-
-            return print("Invalid credentials. Please Try again")
+                else:
+           
+                    return print("Invalid credentials. Please Try again")
         
-    print("Invalid Login Credentials. Try Again")
+        else:
+            print("Invalid Login Credentials. Try Again")
     return None
-    
-def add_harvest(farmer_id):
-    print("Add harvest")
-
-    product_type = input("Enter product type (Crop/Livestock): ").capitalize()
-    name = input("Enter product name: ").capitalize()
-    quantity = int(input("Enter quantity: "))
-    price = float(input("Enter price: "))
-
-    extra_info = {}
-    if product_type == "Crop":
-        extra_info["variety"] = input("Enter crop variety: ").capitalize()
-        extra_info["variety"] = input("Enter season: ").capitalize()
-    elif product_type == "Livestock":
-        extra_info["variety"] = input("Enter livestock breed: ").capitalize()
-    else:
-        print("Invalid product type. Must be crop or Livestock")
-        return None 
-
-    harvest_date = input("Enter harvest date (YYYY-MM-DD): ")
-
-    #use service
-    harvest = HarvestService.add_harvest(farmer_id, product_type, name, quantity, price, extra_info, harvest_date)
-    print("\nHarvest added successfully")
-    print(harvest)
-    return harvest
-
 
 def main():
     while True:
