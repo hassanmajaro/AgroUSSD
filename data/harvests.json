@@ -9,5 +9,16 @@
                "type": "Livestock"
           },
           "harvest_date": "2025-09-23"
+     },
+     {
+          "harvest_id": "H9976",
+          "farmer_id": "AgF2117",
+          "product": {
+               "name": "Goat",
+               "quantity": 10,
+               "price": 30000.0,
+               "type": "Livestock"
+          },
+          "harvest_date": "2025-10-25"
      }
 ]

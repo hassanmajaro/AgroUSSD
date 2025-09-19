@@ -14,5 +14,21 @@
           "location": "Immigration",
           "pin": "254869",
           "role": "Buyer"
+     },
+     {
+          "user_id": "AgB6528",
+          "name": "Ncc",
+          "phone": "0123456789",
+          "location": "Kobape",
+          "pin": "123456",
+          "role": "Buyer"
+     },
+     {
+          "user_id": "AgF2117",
+          "name": "Nccf",
+          "phone": "0321456987",
+          "location": "Debonre",
+          "pin": "098765",
+          "role": "Farmer"
      }
 ]
