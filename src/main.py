@@ -11,11 +11,11 @@ from services.harvest_service import HarvestService
 
 def register_user():
     print("===AgroUSSD User Registration===")
-    role = input("Enter role (Farmer/Buyer): ").capitalize()
+    role = input("Enter role (Farmer/Buyer): ").capitalize().strip()
     name = input("Enter name: ").capitalize()
-    phone = input("Enter phone: ")
+    phone = input("Enter phone: ").strip()
     location = input("Enter location: ").capitalize()
-    pin = input("Set a 6-digit PIN: ")
+    pin = input("Set a 6-digit PIN: ").strip()
 
     try:
         user = UserService.register_user(role, name, phone, location, pin)
@@ -60,8 +60,8 @@ def add_harvest(farmer_id):
     
 def login_user():
     print("\nLogin")
-    phone = input("Enter phone: ")
-    pin = input("Enter PIN: ")
+    phone = input("Enter phone: ").strip()
+    pin = input("Enter PIN: ").strip()
 
     users = load_users()
     for u in users:
@@ -71,7 +71,9 @@ def login_user():
                 option = input("\nDo you want to add harvest? (Yes/No): ").capitalize()
                 if option == "Yes":
                     add_harvest(u["user_id"])
-
+                else:
+                    print(f"Okay {u['role']} {u['name']}. Returning to main menu")
+                    
             elif u["role"] == "Buyer":
                 print("Buyer Menu")           
                 print("1. View all harvests")
@@ -111,14 +113,28 @@ def login_user():
                     else:
                         print("No harvests match your filter")
                 else:
-           
-                    return print("Invalid credentials. Please Try again")
+                    print("Invalid option")
+            return u
         
-        else:
-            print("Invalid Login Credentials. Try Again")
-    return None
+    print("Invalid login credentials. Try again\n")
+    login_user()
+
+def ussd():
+    print("This is Agro USSD System")
+    code = input("Enter USSD code to Continue: ").strip()
+
+    if code == "*300#":
+        print("Good Choice. What would you like to do?")
+        return True 
+    else:
+        print("Invalid USSD code")
+        return False
+
 
 def main():
+    if not ussd():
+        return 
+    
     while True:
         print("\nAgro USSD System")
         print("1. Register")

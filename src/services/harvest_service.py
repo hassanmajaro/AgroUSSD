@@ -10,9 +10,9 @@ class HarvestService:
         """Create and save a new harvest for a farmer."""
 
         if product_type.capitalize() == "Crop":
-            product = Crop(name, quantity, price, extra_info["variety"], extra_info["season"])
+            product = Crop(name, quantity, price, extra_info.get("variety", ""), extra_info.get("season", ""))
         elif product_type.capitalize() == "Livestock":
-            product = Livestock(name, quantity, price, extra_info["variety"])
+            product = Livestock(name, quantity, price, extra_info.get("breed", ""))
         else:
             raise ValueError("Invalid product type: must be Crop or Livestock")
         
@@ -37,12 +37,12 @@ class HarvestService:
         filtered = harvests
 
         if product_type:
-            filtered = [h for h in filtered if h["product_type"].capitalize() == product_type.capitalize()]
+            filtered = [h for h in filtered if h["product"] ["type"].capitalize() == product_type.capitalize()]
 
         if crop:
-            filtered = [h for h in filtered if h.get("crop", "").capitalize() == crop.capitalize()]
+            filtered = [h for h in filtered if h["product"] ["name"].capitalize() == crop.capitalize()]
 
         if livestock:
-            filtered = [h for h in filtered if h.get("livestock", "").capitalize() == livestock.capitalize()]
+            filtered = [h for h in filtered if h["product"] ["name"].capitalize() == livestock.capitalize()]
         
         return filtered

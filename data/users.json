@@ -30,5 +30,13 @@
           "location": "Debonre",
           "pin": "098765",
           "role": "Farmer"
+     },
+     {
+          "user_id": "AgF5120",
+          "name": "Adamu",
+          "phone": "09021325476",
+          "location": "102030",
+          "pin": "102203",
+          "role": "Farmer"
      }
 ]
