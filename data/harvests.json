@@ -31,5 +31,16 @@
                "type": "Crop"
           },
           "harvest_date": "2025-09-28"
+     },
+     {
+          "harvest_id": "H4086",
+          "farmer_id": "AgF7256",
+          "product": {
+               "name": "Mango",
+               "quantity": 900,
+               "price": 450.0,
+               "type": "Crop"
+          },
+          "harvest_date": "2026-08-24"
      }
 ]

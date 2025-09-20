@@ -6,6 +6,7 @@ from models.crop import Crop
 from models.livestock import Livestock 
 from models.harvest import Harvest 
 from services.harvest_service import HarvestService
+from services.match_service import MatchService
 
 
 
@@ -35,10 +36,10 @@ def register_user():
 def add_harvest(farmer_id):
     print("Add harvest")
 
-    product_type = input("Enter product type (Crop/Livestock): ").capitalize()
-    name = input("Enter product name: ").capitalize()
+    product_type = input("Enter product type (Crop/Livestock): ").capitalize().strip()
+    name = input("Enter product name: ").capitalize().strip()
     quantity = int(input("Enter quantity: "))
-    price = float(input("Enter price: "))
+    price = float(input("Enter price: N"))
 
     extra_info = {}
     if product_type == "Crop":
@@ -50,7 +51,7 @@ def add_harvest(farmer_id):
         print("Invalid product type. Must be crop or Livestock")
         return None 
 
-    harvest_date = input("Enter harvest date (YYYY-MM-DD): ")
+    harvest_date = input("Enter harvest date (YYYY-MM-DD): ").strip()
 
     #use service
     harvest = HarvestService.add_harvest(farmer_id, product_type, name, quantity, price, extra_info, harvest_date)
@@ -78,7 +79,8 @@ def login_user():
                 print("Buyer Menu")           
                 print("1. View all harvests")
                 print("2. Filter harvests")
-                choice = input("Choose option (1/2): ")
+                print("3. Match with Farmers")
+                choice = input("Choose option (1/2/3): ").strip()
 
                 if choice == "1":
                     print("\nAvailable Harvests")
@@ -112,6 +114,25 @@ def login_user():
                             print(r)
                     else:
                         print("No harvests match your filter")
+
+                elif choice == "3":
+                    print("\n Match with Farmers")
+                    p_type = input("Enter product type (Crop/Livestock): ").capitalize().strip()
+                    p_name = input("Enter product name: ").capitalize().strip()
+
+                    results = MatchService.match_harvest_to_buyer(product_type = p_type, product_name = p_name)
+
+                    if results:
+                        print("\nSearching. Harvests found: ")
+                        for r in results:
+                            h = r["harvest"]
+                            f = r["farmer"]
+                            print(f"Harvest: {h['product']['name']} ({h['product']['type']}, )"
+                                  f"Qty: {h['product']['quantity']}, Price: {h['product']['price']}, "
+                                  f"Harvest Date: {h['harvest_date']}")
+                            print(f"Farmer's Contact: {f['name']} | Phone: {f['phone']} | Location: {f['location']}\n")
+                    else:
+                        print("No matches found.")
                 else:
                     print("Invalid option")
             return u
@@ -141,7 +162,7 @@ def main():
         print("2. Login")
         print("3. Quit")
 
-        choice = input("Enter choice: ")
+        choice = input("Enter choice: ").strip()
 
         if choice == "1":
             register_user()

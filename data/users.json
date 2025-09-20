@@ -38,5 +38,13 @@
           "location": "102030",
           "pin": "102203",
           "role": "Farmer"
+     },
+     {
+          "user_id": "AgB7574",
+          "name": "Bimpe",
+          "phone": "08070605040",
+          "location": "Ibarapa",
+          "pin": "234987",
+          "role": "Buyer"
      }
 ]
