@@ -46,5 +46,13 @@
           "location": "Ibarapa",
           "pin": "234987",
           "role": "Buyer"
+     },
+     {
+          "user_id": "AgF5195",
+          "name": "Egunjobi",
+          "phone": "08090603020",
+          "location": "Immigration",
+          "pin": "234432",
+          "role": "Farmer"
      }
 ]

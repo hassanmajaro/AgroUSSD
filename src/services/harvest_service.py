@@ -37,12 +37,12 @@ class HarvestService:
         filtered = harvests
 
         if product_type:
-            filtered = [h for h in filtered if h["product"] ["type"].capitalize() == product_type.capitalize()]
+            filtered = [h for h in filtered if h["product"]["type"].capitalize() == product_type.capitalize()]
 
         if crop:
-            filtered = [h for h in filtered if h["product"] ["name"].capitalize() == crop.capitalize()]
+            filtered = [h for h in filtered if h["product"]["name"].capitalize() == crop.capitalize()]
 
         if livestock:
-            filtered = [h for h in filtered if h["product"] ["name"].capitalize() == livestock.capitalize()]
+            filtered = [h for h in filtered if h["product"]["name"].capitalize() == livestock.capitalize()]
         
         return filtered

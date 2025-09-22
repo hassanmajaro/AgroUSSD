@@ -42,5 +42,16 @@
                "type": "Crop"
           },
           "harvest_date": "2026-08-24"
+     },
+     {
+          "harvest_id": "H5361",
+          "farmer_id": "AgF5195",
+          "product": {
+               "name": "Maize",
+               "quantity": 300,
+               "price": 500.0,
+               "type": "Crop"
+          },
+          "harvest_date": "2025-09-30"
      }
 ]
