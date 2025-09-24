@@ -1,8 +1,8 @@
 import json 
 from pathlib import Path 
 
-data_dir = Path("data")
-data_dir.mkdir(exist_ok=True)
+data_dir = Path("src/data")
+data_dir.mkdir(parents = True, exist_ok = True)
 
 user_file = data_dir / "users.json"
 harvest_file = data_dir / "harvests.json"
