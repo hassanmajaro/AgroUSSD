@@ -53,5 +53,16 @@
                "type": "Crop"
           },
           "harvest_date": "2025-09-30"
+     },
+     {
+          "harvest_id": "H1283",
+          "farmer_id": "AgF5131",
+          "product": {
+               "name": "Cow",
+               "quantity": 250,
+               "price": 30000.0,
+               "type": "Livestock"
+          },
+          "harvest_date": "2025-09-25"
      }
 ]
